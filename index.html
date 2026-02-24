@@ -162,6 +162,7 @@
 
   /* 机 */
   .desk {
+    display: none;
     position: absolute;
     bottom: 32%;
     left: 50%;
@@ -1020,10 +1021,7 @@
   <div class="desk">
     <div class="desk-items">
       <!-- 記録帳 -->
-      <!-- 記録帳 -->
-      <img src="images/book.png" onclick="openRecordBook()" title="来訪記録帳" style="width:70px; cursor:pointer; display:block;">
-      <!-- 羽ペン（飾り） -->
-      <img src="images/hanepen.png" style="width:60px; display:block; pointer-events:none;">
+
       <!-- 余白 -->
       <div style="flex:1"></div>
       <!-- 紅茶 -->
@@ -1042,8 +1040,13 @@
   </div>
 
   <!-- 机 -->
-  <div style="position:absolute; bottom: 28%; left: calc(50% - 480px); width: 280px; z-index: 3; pointer-events: none;">
+  <div style="position:absolute; bottom: 28%; left: calc(50% - 480px); width: 280px; z-index: 3;">
     <img src="images/table.png" style="width:100%; display:block;" alt="机">
+    <!-- 机の上の小物 -->
+    <div style="position:absolute; top: -55px; left: 20px; display:flex; gap:8px; align-items:flex-end;">
+      <img src="images/book.png" onclick="openRecordBook()" title="来訪記録帳" style="width:60px; cursor:pointer; display:block;">
+      <img src="images/hanepen.png" style="width:50px; display:block; pointer-events:none;">
+    </div>
   </div>
 
   <!-- 管理人ドール -->
