@@ -161,8 +161,7 @@
   }
 
   /* 机 */
-  .desk { display: none; }
-  .desk-hidden {
+  .desk {
     position: absolute;
     bottom: 32%;
     left: 50%;
@@ -350,7 +349,7 @@
   .doll-container {
     position: absolute;
     bottom: 18%;
-    right: calc(50% - 170px);
+    right: calc(50% - 300px);
     width: 350px;
     animation: float 4s ease-in-out infinite;
     cursor: default;
@@ -358,8 +357,7 @@
 
   @media (max-width: 700px) {
     .doll-container { right: 5%; width: 140px; }
-    .desk { display: none; }
-  .desk-hidden { width: 95vw; }
+    .desk { width: 95vw; }
   }
 
   @keyframes float {
@@ -1022,11 +1020,10 @@
   <div class="desk">
     <div class="desk-items">
       <!-- 記録帳 -->
-      <div class="record-book" onclick="openRecordBook()" title="来訪記録帳">
-        <span style="color:rgba(201,168,76,0.5);font-size:0.5rem;letter-spacing:0.1em">記録帳</span>
-      </div>
-      <!-- パンフレット -->
-      <div class="pamphlet" onclick="openPamphlet()"></div>
+      <!-- 記録帳 -->
+      <img src="images/book.png" onclick="openRecordBook()" title="来訪記録帳" style="width:70px; cursor:pointer; display:block;">
+      <!-- 羽ペン（飾り） -->
+      <img src="images/hanepen.png" style="width:60px; display:block; pointer-events:none;">
       <!-- 余白 -->
       <div style="flex:1"></div>
       <!-- 紅茶 -->
