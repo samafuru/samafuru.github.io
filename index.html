@@ -116,12 +116,15 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    backface-visibility: hidden;
+    transition: transform 0.8s ease;
+  }
+
+  .sky-slot {
     -webkit-mask-image: url('images/mado.png');
     mask-image: url('images/mado.png');
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
-    backface-visibility: hidden;
-    transition: transform 0.8s ease;
   }
 
   .sky-img.spin-out {
