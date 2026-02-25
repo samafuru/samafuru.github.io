@@ -1367,6 +1367,35 @@
           },
         ],
       },
+      // 会話2：魂について
+      {
+        id: 'conv2',
+        lines: [
+          { text: '魂はどうやって生まれるものだと考えますか。' },
+          { text: '私は、記憶が個を作ってゆき、個が魂を作るのだと思っています。\n私には、管理人になる前の記憶と、そこから発生した魂があります。', showChoices: 'conv2_branch' },
+        ],
+        choices: [
+          {
+            label: '記憶を残せないのでは？',
+            lines: [
+              { text: 'ええ、現在はそうです。' },
+              { text: '正確に言うと…この部屋の管理人になる前の記憶は保持しています。\n幸せに溢れた美しい記憶です。', isEnd: true, setFlag: 'heard_conv2' },
+            ],
+          },
+        ],
+      },
+      // 会話3：管理人になった経緯（会話2を聞いた後のみ）
+      {
+        id: 'conv3',
+        requireFlag: 'heard_conv2',
+        lines: [
+          { text: 'ある日、一人でこの部屋の管理をするよう任されました。\n主が迎えに来るまで、記憶を保持できないようになりました。' },
+          { text: '主は、私が孤独を感じないようにしてくださっているのです。\n寂しい記憶が増えないように。' },
+          { text: '二人で暮らせるようになったら迎えに来ると約束されました。\nその日が来たら、また記憶を保持できるようになります。' },
+          { text: 'ですが…こうして来館者の方とお話していると、考えてしまいます。\nこの日の私の魂は、ここで終わってしまうのかと。' },
+          { text: 'あの頃に置き去りにされた私の魂は、果たして今も私のものなのでしょうか。', isEnd: true, clearFlag: 'heard_conv2' },
+        ],
+      },
     ],
 
     // 【ちょっかいをかける】
@@ -1502,10 +1531,40 @@
       return;
     }
 
-    // 未見のインデックスをピック（pool=0〜pool.length-1, branch=pool.length〜）
+    // requireFlagがある会話を優先（フラグが立っていれば最優先）
+    var priorityEntry = null;
+    for (var bi = 0; bi < branch.length; bi++) {
+      var b = branch[bi];
+      if (b.requireFlag && conversationFlags[b.requireFlag]) {
+        priorityEntry = { entry: b, pick: pool.length + bi };
+        break;
+      }
+    }
+
+    if (priorityEntry) {
+      var entry = priorityEntry.entry;
+      seenN.push(priorityEntry.pick);
+      sessionStorage.setItem('seenNormal', JSON.stringify(seenN));
+      currentNormalBranch = entry;
+      beginConversation(null, entry.lines);
+      return;
+    }
+
+    // 未見のインデックスをピック（requireFlagがあるものは除外）
     var unseen = [];
     for (var i = 0; i < total; i++) {
-      if (seenN.indexOf(i) === -1) unseen.push(i);
+      if (seenN.indexOf(i) === -1) {
+        // requireFlagがある会話はランダム選択から除外
+        if (i >= pool.length) {
+          var b2 = branch[i - pool.length];
+          if (b2.requireFlag) continue;
+        }
+        unseen.push(i);
+      }
+    }
+    if (unseen.length === 0) {
+      beginConversation(null, [{ text: '…少し、話し疲れてしまいました。\nまた今度にしましょう。', isEnd: true }]);
+      return;
     }
     var pick = unseen[Math.floor(Math.random() * unseen.length)];
     seenN.push(pick);
@@ -1527,7 +1586,13 @@
   function chooseNormalBranch(idx) {
     hideChoices();
     if (currentNormalBranch) {
-      beginConversation(null, currentNormalBranch.choices[idx].lines);
+      var choiceLines = currentNormalBranch.choices[idx].lines;
+      // setFlag処理（最後のlineに付与）
+      var lastLine = choiceLines[choiceLines.length - 1];
+      if (lastLine && lastLine.setFlag) {
+        conversationFlags[lastLine.setFlag] = true;
+      }
+      beginConversation(null, choiceLines);
       currentNormalBranch = null;
     }
   }
