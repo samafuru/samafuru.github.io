@@ -1067,7 +1067,7 @@
   <div class="window-container">
     <!-- 空レイヤー -->
     <div class="sky-slot">
-      <img class="sky-img" id="skyImg" src="images/yoru.png" alt="空">
+      <img class="sky-img" id="skyImg" src="" alt="空">
     </div>
     <!-- 窓枠（最前面） -->
     <img class="window-img" src="images/mado.png" alt="窓枠">
@@ -1254,9 +1254,9 @@
 
   // ===== 空の切り替え =====
   function getSkyImage(hour) {
-    if (hour >= 5 && hour < 10) return 'images/asa.png';
-    if (hour >= 10 && hour < 17) return 'images/hiru.png';
-    if (hour >= 17 && hour < 20) return 'images/yuugata.png';
+    if (hour >= 4 && hour < 10) return 'images/asa.png';
+    if (hour >= 10 && hour < 16) return 'images/hiru.png';
+    if (hour >= 16 && hour < 18) return 'images/yuugata.png';
     return 'images/yoru.png';
   }
 
