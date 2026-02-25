@@ -1011,11 +1011,7 @@
 
   <!-- 窓 -->
   <div class="window-container">
-    <div class="window-frame">
-      <div class="window-sky" id="windowSky"></div>
-      <div class="moon" id="moon"></div>
-    </div>
-    <div class="window-sill"></div>
+    <img src="images/mado.png" style="width:100%; display:block;" alt="窓">
   </div>
 
   <!-- 机 -->
@@ -1212,9 +1208,7 @@
     timeLabel = '夜'; skyGradient = 'linear-gradient(to bottom, #0a0818, #1a1040, #2a1860)';
     greeting = 'こんばんは。どうされましたか？'; showMoon = true;
   }
-  document.getElementById('windowSky').style.background = skyGradient;
-  document.getElementById('timeBadge').textContent = timeLabel;
-  if (showMoon) document.getElementById('moon').style.opacity = '1';
+    document.getElementById('timeBadge').textContent = timeLabel;
 
   var savedName = localStorage.getItem('visitorName');
   var visitCount = parseInt(localStorage.getItem('visitCount') || '0') + 1;
