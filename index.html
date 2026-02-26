@@ -1110,8 +1110,8 @@
   </div>
 
   <!-- 管理人ドール -->
-  <div class="doll-container">
-  <img src="images/shukuru_full.png" style="width:100%;display:block;" alt="シュクルヴェイユ">
+  <div class="doll-container" onclick="clickShukuru()" style="cursor:pointer;">
+  <img src="images/shukuru_full.png" style="width:100%;display:block;pointer-events:none;" alt="シュクルヴェイユ">
   </div>
 
   <!-- ティーテーブル -->
@@ -1257,6 +1257,8 @@
 <script>
 
   // ===== 空の切り替え =====
+  var hour = new Date().getHours();
+
   function getSkyImage(hour) {
     if (hour >= 4 && hour < 10) return 'images/asa.png';
     if (hour >= 10 && hour < 16) return 'images/hiru.png';
@@ -1292,7 +1294,6 @@
   }, 60000);
 
   // ===== 時間帯 =====
-  var hour = new Date().getHours();
   var timeLabel, skyGradient, greeting, showMoon = false;
   if (hour >= 4 && hour < 10) {
     timeLabel = '朝'; greeting = 'おはようございます。どうされましたか？';
