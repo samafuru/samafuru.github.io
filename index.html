@@ -1695,6 +1695,9 @@
     }
     // 最終ページ処理
     if (line.isEnd) {
+      if (line.clearFlag) {
+        conversationFlags[line.clearFlag] = false;
+      }
       if (line.setFarewellFlag) {
         closeNovel();
       } else {
@@ -1708,14 +1711,6 @@
   }
 
   function handleNovelClick(e) {
-    // 選択肢が表示中はクリックを無視
-    const choiceAreas = ['novelChoices', 'novelSubChoices', 'novelArtworkChoices', 'novelNormalBranchChoices'];
-    const anyChoiceVisible = choiceAreas.some(function(id) {
-      const el = document.getElementById(id);
-      return el && el.style.display !== 'none';
-    });
-    if (anyChoiceVisible) return;
-
     // 選択肢・閉じるボタン・次へボタン以外ならどこをクリックしても進む
     const ignored = ['choice-btn', 'choice-back', 'novel-close-btn', 'novel-next-btn'];
     const isIgnored = ignored.some(function(cls) { return e.target.classList.contains(cls); });
