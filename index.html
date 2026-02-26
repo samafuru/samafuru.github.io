@@ -1257,8 +1257,9 @@
 <script>
 
   // ===== 空の切り替え =====
-  // セッション開始時にteaseCountをリセット
+  // セッション開始時にリセット
   sessionStorage.removeItem('teaseCount');
+  sessionStorage.removeItem('seenNormal');
 
   var hour = new Date().getHours();
 
