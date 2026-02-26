@@ -150,145 +150,6 @@
     100% { transform: rotateY(0deg); opacity: 1; }
   }
 
-  .window-img {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    display: block;
-  }
-
-  .window-frame {
-    width: 220px;
-    height: 280px;
-    border: 6px solid var(--brown-mid);
-    border-radius: 50% 50% 0 0 / 30% 30% 0 0;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 0 40px rgba(0,0,0,0.6), inset 0 0 20px rgba(0,0,0,0.3);
-  }
-
-  .window-sky {
-    width: 100%;
-    height: 100%;
-    transition: background 3s ease;
-  }
-
-  /* 窓枠の十字 */
-  .window-frame::before {
-    content: '';
-    position: absolute;
-    top: 0; bottom: 0;
-    left: 50%;
-    width: 4px;
-    background: var(--brown-mid);
-    transform: translateX(-50%);
-    z-index: 2;
-  }
-  .window-frame::after {
-    content: '';
-    position: absolute;
-    left: 0; right: 0;
-    top: 45%;
-    height: 4px;
-    background: var(--brown-mid);
-    z-index: 2;
-  }
-
-  .window-sill {
-    width: 260px;
-    height: 20px;
-    background: linear-gradient(to bottom, var(--brown-mid), var(--brown-dark));
-    margin: 0 auto;
-    border-radius: 0 0 4px 4px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  }
-
-  /* 月 */
-  .moon {
-    position: absolute;
-    top: 30px;
-    right: 40px;
-    width: 50px;
-    height: 50px;
-    background: radial-gradient(circle at 40% 40%, #fff8dc, #f0d060);
-    border-radius: 50%;
-    box-shadow: 0 0 30px rgba(240,208,96,0.6), 0 0 60px rgba(240,208,96,0.2);
-    opacity: 0;
-    transition: opacity 3s ease;
-  }
-
-  /* 机 */
-  .desk {
-    display: none;
-    position: absolute;
-    bottom: 32%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 600px;
-    max-width: 90vw;
-  }
-
-  .desk-surface {
-    height: 24px;
-    background: linear-gradient(to bottom, #5c3d1e, #3d2510);
-    border-radius: 4px 4px 0 0;
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
-    position: relative;
-  }
-
-  .desk-surface::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(to right, transparent, var(--gold), transparent);
-    opacity: 0.4;
-  }
-
-  .desk-items {
-    position: absolute;
-    top: -60px;
-    left: 0;
-    width: 100%;
-    display: flex;
-    align-items: flex-end;
-    gap: 20px;
-    padding: 0 30px;
-  }
-
-  /* 記録帳 */
-  .record-book {
-    width: 70px;
-    height: 55px;
-    background: linear-gradient(135deg, #8b0000, #5c0000);
-    border-radius: 2px;
-    cursor: pointer;
-    position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 3px 3px 8px rgba(0,0,0,0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .record-book::after {
-    content: '来訪記録帳';
-    position: absolute;
-    bottom: -22px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.55rem;
-    color: var(--gold-light);
-    letter-spacing: 0.1em;
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .record-book:hover {
-    transform: translateY(-4px) rotate(-2deg);
-    box-shadow: 5px 8px 16px rgba(0,0,0,0.6);
-  }
-  .record-book:hover::after { opacity: 1; }
-
   /* パンフレット */
   .pamphlet {
     width: 45px;
@@ -1048,8 +909,70 @@
     opacity: 0.6;
     border-color: rgba(201,168,76,0.2);
   }
-  .choice-back::before { content: ''; }
-  .choice-back:hover { opacity: 1; padding-left: 20px; }
+  /* ===== UTILITY / EXTRACTED INLINE STYLES ===== */
+
+  /* 机エリア */
+  .desk-area {
+    position: absolute;
+    bottom: 26%;
+    left: calc(50% - 346px);
+    width: 280px;
+    z-index: 3;
+  }
+  .desk-img { width: 100%; display: block; }
+  .desk-items-area {
+    position: absolute;
+    top: -110px;
+    right: -20px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+  }
+  .desk-book { width: 120px; cursor: pointer; display: block; }
+  .desk-pen  { width: 100px; display: block; pointer-events: none; }
+
+  /* ティーテーブル */
+  .tea-table-area {
+    position: absolute;
+    bottom: 13%;
+    left: calc(50% - 11px);
+    width: 160px;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .tea-table-img { width: 100%; display: block; }
+
+  /* ドール */
+  .doll-img { width: 100%; display: block; pointer-events: none; }
+
+  /* ノベルドール */
+  .novel-doll-img-actual {
+    width: 100%;
+    display: block;
+    filter: drop-shadow(0 -10px 30px rgba(0,0,0,0.3));
+  }
+
+  /* 作品画像 */
+  .art-frame-filled { padding: 0; overflow: hidden; }
+  .art-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* ロゴ */
+  .logo-area { text-align: center; padding: 60px 20px 20px; }
+  .title-logo { max-width: 500px; width: 80%; }
+
+  /* モーダルハイライト */
+  .modal-highlight {
+    color: var(--gold-light);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+  }
+
+  /* モーダルテキスト（パンフレット用）*/
+  .modal-text-pamphlet { line-height: 2.4; }
+
+  /* モーダルボタン */
+  .modal-close-primary  { margin-top: 16px; }
+  .modal-close-secondary { margin-top: 8px; opacity: 0.5; }
 </style>
 </head>
 <body>
@@ -1078,45 +1001,35 @@
   </div>
 
   <!-- 机 -->
-  <div class="desk">
-    <div class="desk-items">
-      <!-- 記録帳 -->
-
-      <!-- 余白 -->
-      <div style="flex:1"></div>
-      <!-- 紅茶 -->
-      <div class="teacup-wrapper" onclick="openTea()">
-        <div style="position:relative">
-          <div class="steam-container">
-            <div class="steam"></div>
-            <div class="steam"></div>
-            <div class="steam"></div>
-          </div>
-          <div class="teacup"></div>
-        </div>
-      </div>
-    </div>
-    <div class="desk-surface"></div>
-  </div>
-
-  <!-- 机 -->
-  <div style="position:absolute; bottom: 26%; left: calc(50% - 346px); width: 280px; z-index: 3;">
-    <img src="images/table.png" style="width:100%; display:block;" alt="机">
+  <div class="desk-area">
+    <img src="images/table.png" class="desk-img" alt="机">
     <!-- 机の上の小物 -->
-    <div style="position:absolute; top: -110px; right: -20px; display:flex; gap:8px; align-items:flex-end;">
-      <img src="images/book.png" onclick="openRecordBook()" title="来訪記録帳" style="width:120px; cursor:pointer; display:block;">
-      <img src="images/hanepen.png" style="width:100px; display:block; pointer-events:none;">
+    <div class="desk-items-area">
+      <img src="images/book.png" onclick="openRecordBook()" title="来訪記録帳" class="desk-book" alt="来訪記録帳">
+      <img src="images/hanepen.png" class="desk-pen" alt="ペン">
     </div>
   </div>
 
   <!-- 管理人ドール -->
-  <div class="doll-container" onclick="clickShukuru()" style="cursor:pointer;">
-  <img src="images/shukuru_full.png" style="width:100%;display:block;pointer-events:none;" alt="シュクルヴェイユ">
+  <div class="doll-container" onclick="clickShukuru()">
+    <img src="images/shukuru_full.png" class="doll-img" alt="シュクルヴェイユ">
   </div>
 
   <!-- ティーテーブル -->
-  <div style="position:absolute; bottom: 13%; left: calc(50% - 11px); width: 160px; z-index: 5; pointer-events: none;">
-    <img src="images/teatable.png" style="width:100%; display:block;" alt="ティーテーブル">
+  <div class="tea-table-area">
+    <img src="images/teatable.png" class="tea-table-img" alt="ティーテーブル">
+  </div>
+
+  <!-- 紅茶カップ -->
+  <div class="teacup-wrapper" onclick="openTea()">
+    <div style="position:relative">
+      <div class="steam-container">
+        <div class="steam"></div>
+        <div class="steam"></div>
+        <div class="steam"></div>
+      </div>
+      <div class="teacup"></div>
+    </div>
   </div>
 
   <!-- 挨拶 -->
@@ -1144,12 +1057,12 @@
   <!-- 最新作 -->
   <div class="featured-art">
   <!-- 標本室ロゴ看板 -->
-  <div style="text-align:center; padding: 60px 20px 20px;">
-    <img src="images/title_logo.png" style="max-width:500px; width:80%;" alt="まどろみ標本室">
+  <div class="logo-area">
+    <img src="images/title_logo.png" class="title-logo" alt="まどろみ標本室">
   </div>
 
-    <div class="art-frame" style="padding:0;overflow:hidden;">
-      <img src="images/suguniakiru.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="すぐに飽きる">
+    <div class="art-frame art-frame-filled">
+      <img src="images/suguniakiru.jpg" class="art-img" alt="すぐに飽きる">
     </div>
     <div class="art-caption">最新収蔵品 ― すぐに飽きる</div>
   </div>
@@ -1186,7 +1099,7 @@
   <div class="novel-bg-dim"></div>
 
   <div class="novel-doll-area">
-  <img src="images/shukuru_bust.png" style="width:100%;display:block;filter:drop-shadow(0 -10px 30px rgba(0,0,0,0.3));" alt="シュクルヴェイユ">
+    <img src="images/shukuru_bust.png" class="novel-doll-img-actual" alt="シュクルヴェイユ">
   </div>
 
   <div class="novel-text-window">
@@ -1222,15 +1135,15 @@
 <div class="modal-overlay" id="pamphletModal" onclick="closePamphlet(event)">
   <div class="modal-box" onclick="event.stopPropagation()">
     <div class="modal-title">― 標本室のご案内 ―</div>
-    <div class="modal-text" style="line-height:2.4;">
+    <div class="modal-text modal-text-pamphlet">
       お砂糖で固めた甘い標本が眠る、<br>
       小さなヴンダーカンマー。<br>
       ここは人形師が大切なものを収めた場所です。<br><br>
-      <span style="color:var(--gold-light);font-size:0.75rem;letter-spacing:0.2em;">— 管理人と話す —</span><br>
+      <span class="modal-highlight">— 管理人と話す —</span><br>
       管理人の人形とお話しできます。<br>
       机の上の記録帳にお名前を書き留めると、<br>
       彼女があなたのことを呼んでくれます。<br><br>
-      <span style="color:var(--gold-light);font-size:0.75rem;letter-spacing:0.2em;">— 紅茶を贈る —</span><br>
+      <span class="modal-highlight">— 紅茶を贈る —</span><br>
       気が向いたら、紅茶を一杯贈ってみてください。<br><br>
       どうぞ、ゆっくりしていってください。
     </div>
@@ -1246,8 +1159,8 @@
       記録帳に、お名前を書き留めますか？
     </div>
     <input type="text" class="record-input" id="recordInput" placeholder="お名前をどうぞ…" maxlength="20">
-    <button class="modal-close" onclick="saveRecord()" style="margin-top:16px">書き留める</button>
-    <button class="modal-close" onclick="closeRecord()" style="margin-top:8px;opacity:0.5">また今度</button>
+    <button class="modal-close modal-close-primary" onclick="saveRecord()">書き留める</button>
+    <button class="modal-close modal-close-secondary" onclick="closeRecord()">また今度</button>
   </div>
 </div>
 
@@ -1261,17 +1174,17 @@
   sessionStorage.removeItem('teaseCount');
   sessionStorage.removeItem('seenNormal');
 
-  var hour = new Date().getHours();
+  const hour = new Date().getHours();
 
-  function getSkyImage(hour) {
-    if (hour >= 4 && hour < 10) return 'images/asa.png';
-    if (hour >= 10 && hour < 16) return 'images/hiru.png';
-    if (hour >= 16 && hour < 18) return 'images/yuugata.png';
+  function getSkyImage(h) {
+    if (h >= 4 && h < 10) return 'images/asa.png';
+    if (h >= 10 && h < 16) return 'images/hiru.png';
+    if (h >= 16 && h < 18) return 'images/yuugata.png';
     return 'images/yoru.png';
   }
 
   function changeSky(newSrc) {
-    var img = document.getElementById('skyImg');
+    const img = document.getElementById('skyImg');
     img.classList.add('spin-out');
     setTimeout(function() {
       img.src = newSrc;
@@ -1284,13 +1197,13 @@
   }
 
   // 初期空設定
-  var currentSky = getSkyImage(hour);
+  let currentSky = getSkyImage(hour);
   document.getElementById('skyImg').src = currentSky;
 
   // 1分ごとにチェック
   setInterval(function() {
-    var h = new Date().getHours();
-    var newSky = getSkyImage(h);
+    const h = new Date().getHours();
+    const newSky = getSkyImage(h);
     if (newSky !== currentSky) {
       currentSky = newSky;
       changeSky(newSky);
@@ -1298,7 +1211,7 @@
   }, 60000);
 
   // ===== 時間帯 =====
-  var timeLabel, skyGradient, greeting, showMoon = false;
+  let timeLabel, greeting;
   if (hour >= 4 && hour < 10) {
     timeLabel = '朝'; greeting = 'おはようございます。どうされましたか？';
   } else if (hour >= 10 && hour < 16) {
@@ -1306,39 +1219,40 @@
   } else if (hour >= 16 && hour < 18) {
     timeLabel = '夕'; greeting = 'こんばんは。どうされましたか？';
   } else {
-    timeLabel = '夜'; greeting = 'こんばんは。どうされましたか？'; showMoon = true;
+    timeLabel = '夜'; greeting = 'こんばんは。どうされましたか？';
   }
-    document.getElementById('timeBadge').textContent = timeLabel;
+  document.getElementById('timeBadge').textContent = timeLabel;
 
-  var savedName = localStorage.getItem('visitorName');
-  var visitCount = parseInt(localStorage.getItem('visitCount') || '0') + 1;
+  const savedName = localStorage.getItem('visitorName');
+  const visitCount = parseInt(localStorage.getItem('visitCount') || '0') + 1;
   localStorage.setItem('visitCount', visitCount);
+
   // ===== トップ吹き出し =====
-  var topAnnounce = 'まどろみ標本室制作中です'; // 告知文（空にするとランダムのみ）
-  var topTimeGreet = {
+  const topAnnounce = 'まどろみ標本室制作中です'; // 告知文（空にするとランダムのみ）
+  const topTimeGreet = {
     morning: 'おはようございます。',
     day:     'こんにちは。',
     evening: 'こんばんは。',
     night:   'こんばんは。',
   };
-  var topRandom = [
+  const topRandom = [
     'ゆっくりご覧になってください。',
   ];
 
   function getTopBubbleText() {
-    var timeGreet = '';
+    let timeGreet = '';
     if (hour >= 4 && hour < 10)       timeGreet = topTimeGreet.morning;
     else if (hour >= 10 && hour < 16)  timeGreet = topTimeGreet.day;
     else if (hour >= 16 && hour < 18)  timeGreet = topTimeGreet.evening;
     else                               timeGreet = topTimeGreet.night;
 
-    var pool = topRandom.concat([timeGreet]);
+    const pool = topRandom.concat([timeGreet]);
     return pool[Math.floor(Math.random() * pool.length)];
   }
 
-  var bubbleClicked = false;
+  let bubbleClicked = false;
   function clickShukuru() {
-    var bubble = document.getElementById('greetingBubble');
+    const bubble = document.getElementById('greetingBubble');
     if (!bubbleClicked && topAnnounce) {
       bubble.textContent = topAnnounce;
       bubbleClicked = true;
@@ -1364,7 +1278,7 @@
   // setFarewellFlag: true → お別れフラグを立てる
   // clearFarewellFlag: true → お別れフラグを消す
 
-  var conversationSets = {
+  const conversationSets = {
 
     greeting: [
       { text: greeting, showChoices: 'top' },
@@ -1465,37 +1379,26 @@
   };
 
   // 会話後の短い挨拶（ランダム）← ここに追加できます
-  var returnGreetings = [
-    '他に何かございますか？',
-    '…まだいらっしゃるのですね。',
-    '何かご用でしょうか。',
-    'いかがでしたか？',
-    '…はい、なんでしょう。',
-    'またお話しできますか？',
-  ];
 
   // 作品解説（ランダム）← 新作が増えたらここに追加するだけ！
-  var artworkPool = [
+  const artworkPool = [
     '「溶けきるまで綺麗」という作品はご覧になりましたか？\n崩れるクリスマスケーキの中央に置かれたキャンドルの少女が綺麗なまま佇んでいる作品です。絵画の部屋にございます。\n…溶けゆくろうそくは儚いですね。',
     '「すぐに飽きる」という作品はご覧になられましたか？\nうさぎのかぶりものをした人物が大きく描かれた、オイルパステル画です。\n絵画の部屋にあるのでぜひ見てみてください。',
     '「あかちゃん」という作品はご覧になりましたでしょうか。\nセリアドールに樹脂粘土で装飾した立体作品です。人形の部屋にございます。\n…セリアドールとは一体なんでしょう。',
   ];
 
-  // 全部見終わったときの固定セリフ
-  var artworkDoneText = 'どうぞごゆっくりご覧になってください。';
-
   // ===== 状態変数 =====
-  var currentConversations = [];
-  var currentLine = 0;
-  var currentPages = [];
-  var currentPage = 0;
-  var isTyping = false;
-  var typeInterval = null;
-  var isFirstGreeting = true;
-  var conversationFlags = {};
-  var lastCategory = null; // 'talk' or null
+  let currentConversations = [];
+  let currentLine = 0;
+  let currentPages = [];
+  let currentPage = 0;
+  let isTyping = false;
+  let typeInterval = null;
+  let isFirstGreeting = true;
+  const conversationFlags = {};
+  let lastCategory = null; // 'talk' or null
 
-  var returnGreetings = [
+  const returnGreetings = [
     '他に何かございますか？',
     '…まだいらっしゃるのですね。',
     '何かご用でしょうか。',
@@ -1512,11 +1415,11 @@
   // ===== 選択肢表示 =====
   function showChoices(which) {
     isFirstGreeting = false;
-    var top = document.getElementById('novelChoices');
-    var sub = document.getElementById('novelSubChoices');
-    var artwork = document.getElementById('novelArtworkChoices');
-    var btn = document.getElementById('novelNextBtn');
-    var normalBranch = document.getElementById('novelNormalBranchChoices');
+    const top = document.getElementById('novelChoices');
+    const sub = document.getElementById('novelSubChoices');
+    const artwork = document.getElementById('novelArtworkChoices');
+    const btn = document.getElementById('novelNextBtn');
+    const normalBranch = document.getElementById('novelNormalBranchChoices');
     top.style.display = 'none';
     sub.style.display = 'none';
     artwork.style.display = 'none';
@@ -1528,11 +1431,10 @@
       artwork.style.display = 'flex';
     } else if (which && which.startsWith('normal_branch_')) {
       // 選択肢ありの雑談：ボタンを動的生成
-      var branchIdx = parseInt(which.replace('normal_branch_', ''));
       normalBranch.innerHTML = '';
       if (currentNormalBranch) {
         currentNormalBranch.choices.forEach(function(choice, i) {
-          var btn2 = document.createElement('button');
+          const btn2 = document.createElement('button');
           btn2.className = 'choice-btn';
           btn2.textContent = choice.label;
           btn2.onclick = function() { chooseNormalBranch(i); };
@@ -1553,7 +1455,7 @@
   }
   function showTopChoices() {
     // テキストを直前の挨拶に戻す
-    var text = returnGreetings[Math.floor(Math.random() * returnGreetings.length)];
+    const text = returnGreetings[Math.floor(Math.random() * returnGreetings.length)];
     document.getElementById('novelTextContent').textContent = text;
     document.getElementById('novelCursor').style.display = 'none';
     showChoices('top');
@@ -1561,10 +1463,10 @@
   function showSubChoices() { showChoices('sub'); }
 
   function startNormal() {
-    var seenN = JSON.parse(sessionStorage.getItem('seenNormal') || '[]');
-    var pool = conversationSets.normalPool;
-    var branch = conversationSets.normalPoolBranch;
-    var total = pool.length + branch.length;
+    const seenN = JSON.parse(sessionStorage.getItem('seenNormal') || '[]');
+    const pool = conversationSets.normalPool;
+    const branch = conversationSets.normalPoolBranch;
+    const total = pool.length + branch.length;
 
     // 全部見た
     if (seenN.length >= total) {
@@ -1573,9 +1475,9 @@
     }
 
     // requireFlagがある会話を優先（フラグが立っていれば最優先）
-    var priorityEntry = null;
-    for (var bi = 0; bi < branch.length; bi++) {
-      var b = branch[bi];
+    let priorityEntry = null;
+    for (let bi = 0; bi < branch.length; bi++) {
+      const b = branch[bi];
       if (b.requireFlag && conversationFlags[b.requireFlag]) {
         priorityEntry = { entry: b, pick: pool.length + bi };
         break;
@@ -1583,7 +1485,7 @@
     }
 
     if (priorityEntry) {
-      var entry = priorityEntry.entry;
+      const entry = priorityEntry.entry;
       seenN.push(priorityEntry.pick);
       sessionStorage.setItem('seenNormal', JSON.stringify(seenN));
       currentNormalBranch = entry;
@@ -1592,12 +1494,12 @@
     }
 
     // 未見のインデックスをピック（requireFlagがあるものは除外）
-    var unseen = [];
-    for (var i = 0; i < total; i++) {
+    const unseen = [];
+    for (let i = 0; i < total; i++) {
       if (seenN.indexOf(i) === -1) {
         // requireFlagがある会話はランダム選択から除外
         if (i >= pool.length) {
-          var b2 = branch[i - pool.length];
+          const b2 = branch[i - pool.length];
           if (b2.requireFlag) continue;
         }
         unseen.push(i);
@@ -1607,7 +1509,7 @@
       beginConversation(null, [{ text: '…少し、話し疲れてしまいました。\nまた今度にしましょう。', isEnd: true }]);
       return;
     }
-    var pick = unseen[Math.floor(Math.random() * unseen.length)];
+    const pick = unseen[Math.floor(Math.random() * unseen.length)];
     seenN.push(pick);
     sessionStorage.setItem('seenNormal', JSON.stringify(seenN));
 
@@ -1616,20 +1518,20 @@
       beginConversation(null, pool[pick]);
     } else {
       // 選択肢あり
-      var entry = branch[pick - pool.length];
+      const entry = branch[pick - pool.length];
       currentNormalBranch = entry;
       beginConversation(null, entry.lines);
     }
   }
 
-  var currentNormalBranch = null;
+  let currentNormalBranch = null;
 
   function chooseNormalBranch(idx) {
     hideChoices();
     if (currentNormalBranch) {
-      var choiceLines = currentNormalBranch.choices[idx].lines;
+      const choiceLines = currentNormalBranch.choices[idx].lines;
       // setFlag処理（最後のlineに付与）
-      var lastLine = choiceLines[choiceLines.length - 1];
+      const lastLine = choiceLines[choiceLines.length - 1];
       if (lastLine && lastLine.setFlag) {
         conversationFlags[lastLine.setFlag] = true;
       }
@@ -1672,9 +1574,9 @@
   }
 
   function startTease() {
-    var count = parseInt(sessionStorage.getItem('teaseCount') || '0');
-    var lines = conversationSets.tease;
-    var text, isEnd;
+    const count = parseInt(sessionStorage.getItem('teaseCount') || '0');
+    const lines = conversationSets.tease;
+    let text;
     if (count >= lines.length) {
       // 8回目以降は無視
       text = '(無視)';
@@ -1707,15 +1609,14 @@
       beginConversation('stayed', null);
       return;
     }
-    var text = returnGreetings[Math.floor(Math.random() * returnGreetings.length)];
-    var which = (lastCategory === 'talk') ? 'sub' : 'top';
+    const text = returnGreetings[Math.floor(Math.random() * returnGreetings.length)];
+    const which = (lastCategory === 'talk') ? 'sub' : 'top';
     beginConversation(null, [{ text: text, showChoices: which }]);
   }
 
-  // ===== セリフ表示 =====
   function showLine(index) {
     if (index >= currentConversations.length) { closeNovel(); return; }
-    var line = currentConversations[index];
+    const line = currentConversations[index];
     currentPages = line.text.split('\n').filter(function(s) { return s.length > 0; });
     if (currentPages.length === 0) currentPages = [line.text];
     currentPage = 0;
@@ -1723,15 +1624,15 @@
   }
 
   function showPage(line) {
-    var textEl = document.getElementById('novelTextContent');
-    var cursor = document.getElementById('novelCursor');
-    var nextBtn = document.getElementById('novelNextBtn');
+    const textEl = document.getElementById('novelTextContent');
+    const cursor = document.getElementById('novelCursor');
+    const nextBtn = document.getElementById('novelNextBtn');
     cursor.style.display = 'none';
     nextBtn.disabled = true;
     hideChoices();
     isTyping = true;
-    var i = 0;
-    var pageText = currentPages[currentPage];
+    let i = 0;
+    const pageText = currentPages[currentPage];
     textEl.textContent = '';
     clearInterval(typeInterval);
     typeInterval = setInterval(function() {
@@ -1740,7 +1641,7 @@
       } else {
         clearInterval(typeInterval);
         isTyping = false;
-        var isLastPage = (currentPage >= currentPages.length - 1);
+        const isLastPage = (currentPage >= currentPages.length - 1);
         if (isLastPage && line.showChoices) {
           cursor.style.display = 'none';
           showChoices(line.showChoices);
@@ -1761,14 +1662,14 @@
   }
 
   function nextLine() {
-    var line = currentConversations[currentLine];
+    const line = currentConversations[currentLine];
     // タイプ中なら即表示
     if (isTyping) {
       clearInterval(typeInterval);
       isTyping = false;
-      var pageText = currentPages[currentPage];
+      const pageText = currentPages[currentPage];
       document.getElementById('novelTextContent').textContent = pageText;
-      var isLastPage = (currentPage >= currentPages.length - 1);
+      const isLastPage = (currentPage >= currentPages.length - 1);
       if (isLastPage && line.showChoices) {
         document.getElementById('novelCursor').style.display = 'none';
         showChoices(line.showChoices);
@@ -1808,8 +1709,8 @@
 
   function handleNovelClick(e) {
     // 選択肢・閉じるボタン・次へボタン以外ならどこをクリックしても進む
-    var ignored = ['choice-btn', 'choice-back', 'novel-close-btn', 'novel-next-btn'];
-    var isIgnored = ignored.some(function(cls) { return e.target.classList.contains(cls); });
+    const ignored = ['choice-btn', 'choice-back', 'novel-close-btn', 'novel-next-btn'];
+    const isIgnored = ignored.some(function(cls) { return e.target.classList.contains(cls); });
     if (!isIgnored) {
       nextLine();
     }
@@ -1818,13 +1719,13 @@
   // ===== 作品解説 =====
 
   function startArtwork() {
-    var seen = JSON.parse(sessionStorage.getItem('seenArtwork') || '[]');
-    var unseen = artworkPool.map(function(_, i) { return i; }).filter(function(i) { return seen.indexOf(i) === -1; });
+    const seen = JSON.parse(sessionStorage.getItem('seenArtwork') || '[]');
+    const unseen = artworkPool.map(function(_, i) { return i; }).filter(function(i) { return seen.indexOf(i) === -1; });
     if (unseen.length === 0) {
       // 全部見た → ループか終了か選択肢
       beginConversation(null, [{ text: '収蔵品の紹介は以上にございます。もう一度お聴きになりたいですか？', showChoices: 'artwork' }]);
     } else {
-      var pick = unseen[Math.floor(Math.random() * unseen.length)];
+      const pick = unseen[Math.floor(Math.random() * unseen.length)];
       seen.push(pick);
       sessionStorage.setItem('seenArtwork', JSON.stringify(seen));
       beginConversation(null, [{ text: artworkPool[pick], isEnd: true }]);
@@ -1852,10 +1753,10 @@
 
   // ===== 記録帳 =====
   function openRecordBook() {
-    var modal = document.getElementById('recordModal');
-    var contentEl = document.getElementById('recordContent');
-    var input = document.getElementById('recordInput');
-    var saved = localStorage.getItem('visitorName');
+    const modal = document.getElementById('recordModal');
+    const contentEl = document.getElementById('recordContent');
+    const input = document.getElementById('recordInput');
+    const saved = localStorage.getItem('visitorName');
     if (saved) {
       contentEl.textContent = saved + 'さん…記録帳にはもうお名前が書かれています。';
       input.value = saved;
@@ -1870,7 +1771,7 @@
       document.getElementById('recordModal').classList.remove('active');
   }
   function saveRecord() {
-    var name = document.getElementById('recordInput').value.trim();
+    const name = document.getElementById('recordInput').value.trim();
     if (name) {
       localStorage.setItem('visitorName', name);
       document.getElementById('greetingBubble').textContent = name + 'さん、お名前を書き留めました。';
