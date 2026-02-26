@@ -410,7 +410,7 @@
     right: calc(50% - 356px);
     width: 350px;
     animation: float 4s ease-in-out infinite;
-    cursor: default;
+    cursor: pointer;
     z-index: 4;
   }
 
@@ -1294,18 +1294,14 @@
   // ===== 時間帯 =====
   var hour = new Date().getHours();
   var timeLabel, skyGradient, greeting, showMoon = false;
-  if (hour >= 5 && hour < 10) {
-    timeLabel = '朝'; skyGradient = 'linear-gradient(to bottom, #d4a76a, #f0c88a, #fce4b0)';
-    greeting = 'おはようございます。どうされましたか？';
-  } else if (hour >= 10 && hour < 17) {
-    timeLabel = '昼'; skyGradient = 'linear-gradient(to bottom, #4a90d9, #7ab8f5, #b8d9f8)';
-    greeting = 'こんにちは。どうされましたか？';
-  } else if (hour >= 17 && hour < 20) {
-    timeLabel = '夕'; skyGradient = 'linear-gradient(to bottom, #8b3a1a, #d4693a, #f0a06a)';
-    greeting = 'こんばんは。どうされましたか？';
+  if (hour >= 4 && hour < 10) {
+    timeLabel = '朝'; greeting = 'おはようございます。どうされましたか？';
+  } else if (hour >= 10 && hour < 16) {
+    timeLabel = '昼'; greeting = 'こんにちは。どうされましたか？';
+  } else if (hour >= 16 && hour < 18) {
+    timeLabel = '夕'; greeting = 'こんばんは。どうされましたか？';
   } else {
-    timeLabel = '夜'; skyGradient = 'linear-gradient(to bottom, #0a0818, #1a1040, #2a1860)';
-    greeting = 'こんばんは。どうされましたか？'; showMoon = true;
+    timeLabel = '夜'; greeting = 'こんばんは。どうされましたか？'; showMoon = true;
   }
     document.getElementById('timeBadge').textContent = timeLabel;
 
