@@ -1257,6 +1257,9 @@
 <script>
 
   // ===== 空の切り替え =====
+  // セッション開始時にteaseCountをリセット
+  sessionStorage.removeItem('teaseCount');
+
   var hour = new Date().getHours();
 
   function getSkyImage(hour) {
