@@ -1312,6 +1312,45 @@
   var savedName = localStorage.getItem('visitorName');
   var visitCount = parseInt(localStorage.getItem('visitCount') || '0') + 1;
   localStorage.setItem('visitCount', visitCount);
+  // ===== トップ吹き出し =====
+  var topAnnounce = 'まどろみ標本室制作中です'; // 告知文（空にするとランダムのみ）
+  var topTimeGreet = {
+    morning: 'おはようございます。',
+    day:     'こんにちは。',
+    evening: 'こんばんは。',
+    night:   'こんばんは。',
+  };
+  var topRandom = [
+    'ゆっくりご覧になってください。',
+  ];
+
+  function getTopBubbleText() {
+    var timeGreet = '';
+    if (hour >= 4 && hour < 10)       timeGreet = topTimeGreet.morning;
+    else if (hour >= 10 && hour < 16)  timeGreet = topTimeGreet.day;
+    else if (hour >= 16 && hour < 18)  timeGreet = topTimeGreet.evening;
+    else                               timeGreet = topTimeGreet.night;
+
+    var pool = topRandom.concat([timeGreet]);
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
+
+  var bubbleClicked = false;
+  function clickShukuru() {
+    var bubble = document.getElementById('greetingBubble');
+    if (!bubbleClicked && topAnnounce) {
+      bubble.textContent = topAnnounce;
+      bubbleClicked = true;
+    } else {
+      bubble.textContent = getTopBubbleText();
+      bubbleClicked = true;
+    }
+    bubble.style.animation = 'none';
+    bubble.offsetHeight; // reflow
+    bubble.style.animation = 'fade-in 0.4s ease forwards';
+  }
+
+  // 初期表示
   document.getElementById('greetingBubble').textContent =
     (savedName && visitCount > 1) ? savedName + 'さん…前も来られたようですね。' : 'ゆっくりしていってください。';
 
