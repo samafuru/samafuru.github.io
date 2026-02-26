@@ -1695,9 +1695,6 @@
     }
     // 最終ページ処理
     if (line.isEnd) {
-      if (line.clearFlag) {
-        conversationFlags[line.clearFlag] = false;
-      }
       if (line.setFarewellFlag) {
         closeNovel();
       } else {
